@@ -1,0 +1,29 @@
+{
+  "fields": {
+    "project": {
+      "key": "WSAP"
+    },
+    "parent": {
+      "key": "PRD-7920"
+    },
+    "summary": "[TKA] Node.js Path Traversal Vulnerability - Investigate",
+    "description": {
+      "type": "doc",
+      "version": 1,
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "text": "",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    "issuetype": {
+      "name": "Task"
+    }
+  }
+}
