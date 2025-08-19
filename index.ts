@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs';
 
 const app = express();
-const port = 3000;
+const port = 3000; //comment1
 
 // Create a public directory for files
 const publicDir = path.join(__dirname, 'public');
@@ -21,14 +21,26 @@ if (!fs.existsSync(sampleFilePath)) {
 app.get('/download', (req: Request, res: Response) => {
     const fileName = req.query.file as string;
     
-    // This is the vulnerable part - no path traversal protection
-    const filePath = path.join(publicDir, fileName);
+    const filePath = "something/hard-coded"
     
     if (fs.existsSync(filePath)) {
         res.download(filePath);
     } else {
         res.status(404).send('File not found');
     }
+});
+
+app.get('/ping', (req: Request, res: Response) => {
+    const hostname = req.query.host as string;
+    
+    // This is the vulnerable part - no input validation or sanitization
+    exec(`ping -c 4 ${hostname}`, (error, stdout, stderr) => {
+        if (error) {
+            res.status(500).send(`Error: ${error.message}`);
+            return;
+        }
+        res.send(`<pre>${stdout}</pre>`);
+    });
 });
 
 // Endpoint to read a specific line from the sample file
