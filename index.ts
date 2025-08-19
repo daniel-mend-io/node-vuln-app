@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs';
 
 const app = express();
-const port = 3000;
+const port = 3000; //comment1
 
 // Create a public directory for files
 const publicDir = path.join(__dirname, 'public');
