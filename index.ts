@@ -53,6 +53,14 @@ app.get('/read-line', (req: Request, res: Response) => {
     }
 });
 
+app.get('/download-file', (req: Request, res: Response) => {
+    const fileName = req.query.file as string;
+    
+    const filePath = path.join(publicDir, fileName);
+
+    res.download(filePath);
+});
+
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 }); 
