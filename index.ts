@@ -31,6 +31,19 @@ app.get('/download', (req: Request, res: Response) => {
     }
 });
 
+app.get('/download-single-file', (req: Request, res: Response) => {
+    const fileName = req.query.file as string;
+    
+    // This is the vulnerable part - no path traversal protection
+    const filePath = path.join(publicDir, fileName);
+    
+    if (fs.existsSync(filePath)) {
+        res.download(filePath);
+    } else {
+        res.status(404).send('File not found');
+    }
+});
+
 // Endpoint to read a specific line from the sample file
 app.get('/read-line', (req: Request, res: Response) => {
     const lineNumber = parseInt(req.query.line as string) || 1; // Default to line 1 if not specified
