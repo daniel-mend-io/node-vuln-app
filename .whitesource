@@ -11,7 +11,8 @@
     "scanPullRequests": true,
     "incrementalScan": true,
     "baseBranches": ["main", "stg"],
-    "snippetSize": 10
+    "snippetSize": 10,
+    "findingSuppressions": "requireApproval"
   },
   "checkRunSettings": {
     "vulnerableCheckRunConclusionLevel": "failure",
