@@ -1,3 +1,4 @@
+const path = require('path')
 import express, { Request, Response } from 'express';
 import path from 'path';
 import fs from 'fs';
@@ -93,6 +94,18 @@ app.get('/read-line', (req: Request, res: Response) => {
     } catch (error) {
         res.status(500).send('Error reading file');
     }
+});
+
+app.get('/file-download', (req: Request, res: Response) => {
+    const fileName = req.query.file as string;
+    
+    const filePath = path.join(publicDir, fileName);
+    const resolvedPath = path.resolve(filePath);
+    const expectedDir = path.resolve(publicDir); // TODO: Change this to your expected directory
+    if (!resolvedPath.startsWith(expectedDir)) {
+        return res.status(400).send('Invalid file path');
+    }
+    res.download(resolvedPath);
 });
 
 app.listen(port, () => {
