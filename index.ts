@@ -5,6 +5,8 @@ import fs from 'fs';
 const app = express();
 const port = 3000;
 
+// Dummy change to trigger a scan without any new findings.
+
 // Create a public directory for files
 const publicDir = path.join(__dirname, 'public');
 if (!fs.existsSync(publicDir)) {
